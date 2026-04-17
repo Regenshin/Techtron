@@ -1,0 +1,62 @@
+@import 'tailwindcss';
+@import '@nuxt/ui';
+
+@theme {
+  --font-sans: 'Inter', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  
+  /* Techtron Live - Red and Black Theme */
+  --color-techtron-red: #dc2626;
+  --color-techtron-dark-red: #991b1b;
+  --color-techtron-black: #0a0a0a;
+  --color-techtron-dark: #171717;
+  --color-techtron-gray: #262626;
+  --color-techtron-light-gray: #404040;
+}
+
+:root {
+  --ui-radius: 0.5rem;
+  --ui-container: 80rem;
+  --ui-primary: var(--color-techtron-red);
+}
+
+.dark {
+  --ui-primary: var(--color-techtron-red);
+}
+
+/* Custom animations */
+@keyframes spin-slow {
+  from {
+    transform: rotateY(0deg);
+  }
+  to {
+    transform: rotateY(360deg);
+  }
+}
+
+.animate-spin-slow {
+  animation: spin-slow 20s linear infinite;
+}
+
+/* Gradient text */
+.text-gradient {
+  background: linear-gradient(135deg, #dc2626, #ef4444);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Hero glow effect */
+.glow-red {
+  box-shadow: 0 0 60px rgba(220, 38, 38, 0.3);
+}
+
+/* Card hover effects */
+.card-hover {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card-hover:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 20px 40px rgba(220, 38, 38, 0.15);
+}

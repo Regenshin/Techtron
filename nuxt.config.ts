@@ -5,6 +5,9 @@ export default defineNuxtConfig({
   compatibilityDate: '2025-01-01',
 
   app: {
+    
+  baseURL: '/Techtron-Live-Limited/',
+
     head: {
       title: 'Techtron Live Limited',
       meta: [

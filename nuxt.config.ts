@@ -6,7 +6,7 @@ export default defineNuxtConfig({
 
   app: {
     
-  baseURL: '/Techtron-Live-Limited/',
+  baseURL: '/Techtron/',
 
     head: {
       title: 'Techtron Live Limited',

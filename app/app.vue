@@ -16,7 +16,7 @@ const navItems = computed<NavigationMenuItem[]>(() => [
     <UHeader class="bg-[#0a0a0a] border-b border-neutral-800 h-30">
       <template #title>
         <NuxtLink to="/" class="flex items-center gap-3">
-           <img src="/logo.png" alt="Techtron Live Limited" class="h-28 w-auto" />
+           <img src="/Logo.png" alt="Techtron Live Limited" class="h-28 w-auto" />
           
         </NuxtLink>
       </template>

@@ -71,8 +71,8 @@ const testimonials = [
     <!-- Hero Section with Globe -->
     <section class="relative overflow-hidden py-12 lg:py-20">
       <!-- Background effects -->
-      <div class="absolute inset-0 bg-gradient-to-b from-red-950/20 via-transparent to-transparent" />
-      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px] bg-red-600/5 rounded-full blur-3xl" />
+      <div class="absolute inset-0 from-red-950/20 via-transparent to-transparent" />
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px]  rounded-full blur-3xl" />
       
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid lg:grid-cols-2 gap-12 items-center">
@@ -83,7 +83,7 @@ const testimonials = [
               <span class="text-red-400 text-sm font-medium">Now Serving Nationwide</span>
             </div>
             
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-tight mb-6">
+            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-black leading-tight mb-6">
               Powering Your
               <span class="text-red-500">Digital</span>
               <br />
@@ -122,7 +122,7 @@ const testimonials = [
     </section>
     
     <!-- Stats Section -->
-    <section class="py-12 bg-neutral-900/50 border-y border-neutral-800">
+    <section class="py-12 bg-black border-y border-neutral-800">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
           <div 
@@ -142,7 +142,7 @@ const testimonials = [
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
           <span class="text-red-500 font-semibold text-sm uppercase tracking-wider">What We Offer</span>
-          <h2 class="text-3xl md:text-4xl font-bold text-white mt-4 mb-4">
+          <h2 class="text-3xl md:text-4xl font-bold text-black mt-4 mb-4">
             Comprehensive Tech Solutions
           </h2>
           <p class="text-neutral-400 max-w-2xl mx-auto">
@@ -178,12 +178,12 @@ const testimonials = [
     </section>
     
     <!-- Why Choose Us Section -->
-    <section class="py-20 bg-neutral-900/50">
+    <section class="py-20 bg-white">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid lg:grid-cols-2 gap-12 items-center">
           <div>
             <span class="text-red-500 font-semibold text-sm uppercase tracking-wider">Why Choose Us</span>
-            <h2 class="text-3xl md:text-4xl font-bold text-white mt-4 mb-6">
+            <h2 class="text-3xl md:text-4xl font-bold text-black mt-4 mb-6">
               Building Trust Through Technology
             </h2>
             <p class="text-neutral-400 mb-8">
@@ -196,7 +196,7 @@ const testimonials = [
                   <UIcon name="i-lucide-shield-check" class="size-5 text-red-500" />
                 </div>
                 <div>
-                  <h4 class="text-white font-semibold">Warranty Guaranteed</h4>
+                  <h4 class="text-black font-semibold">Warranty Guaranteed</h4>
                   <p class="text-neutral-400 text-sm">All repairs come with a comprehensive warranty for your peace of mind.</p>
                 </div>
               </div>
@@ -206,7 +206,7 @@ const testimonials = [
                   <UIcon name="i-lucide-clock" class="size-5 text-red-500" />
                 </div>
                 <div>
-                  <h4 class="text-white font-semibold">Quick Turnaround</h4>
+                  <h4 class="text-black font-semibold">Quick Turnaround</h4>
                   <p class="text-neutral-400 text-sm">Most repairs completed within 24-48 hours. Same-day service available.</p>
                 </div>
               </div>
@@ -216,7 +216,7 @@ const testimonials = [
                   <UIcon name="i-lucide-users" class="size-5 text-red-500" />
                 </div>
                 <div>
-                  <h4 class="text-white font-semibold">Expert Technicians</h4>
+                  <h4 class="text-black font-semibold">Expert Technicians</h4>
                   <p class="text-neutral-400 text-sm">Certified professionals with years of experience in the industry.</p>
                 </div>
               </div>
@@ -246,7 +246,7 @@ const testimonials = [
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-16">
           <span class="text-red-500 font-semibold text-sm uppercase tracking-wider">Testimonials</span>
-          <h2 class="text-3xl md:text-4xl font-bold text-white mt-4 mb-4">
+          <h2 class="text-3xl md:text-4xl font-bold text-neutral-800 mt-4 mb-4">
             What Our Customers Say
           </h2>
           <p class="text-neutral-400 max-w-2xl mx-auto">
@@ -258,16 +258,16 @@ const testimonials = [
           <div 
             v-for="testimonial in testimonials" 
             :key="testimonial.name"
-            class="bg-neutral-900 border border-neutral-800 rounded-xl p-6"
+            class="bg-white border border-neutral-800 rounded-xl p-6"
           >
             <div class="flex items-center gap-1 mb-4">
               <UIcon v-for="i in 5" :key="i" name="i-lucide-star" class="size-4 text-yellow-500 fill-yellow-500" />
             </div>
-            <p class="text-neutral-300 mb-6">{{ `"${testimonial.content}"` }}</p>
+            <p class="text-black mb-6">{{ `"${testimonial.content}"` }}</p>
             <div class="flex items-center gap-3">
               <UAvatar :src="testimonial.avatar" :alt="testimonial.name" size="md" />
               <div>
-                <div class="text-white font-semibold">{{ testimonial.name }}</div>
+                <div class="text-neutral-800 font-semibold">{{ testimonial.name }}</div>
                 <div class="text-neutral-500 text-sm">{{ testimonial.role }}</div>
               </div>
             </div>
@@ -277,12 +277,12 @@ const testimonials = [
     </section>
     
     <!-- CTA Section -->
-    <section class="py-20 bg-gradient-to-r from-red-950/50 via-red-900/30 to-red-950/50">
+    <section class="py-20  from-red-950/50 via-red-900/30 to-red-950/50">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">
+        <h2 class="text-3xl md:text-4xl font-bold text-neutral-800 mb-4">
           Ready to Get Started?
         </h2>
-        <p class="text-neutral-400 mb-8 text-lg">
+        <p class="text-neutral-600 mb-8 text-lg">
           Contact us today for a free consultation and quote. Let us help you solve your technology needs.
         </p>
         <div class="flex flex-col sm:flex-row gap-4 justify-center">

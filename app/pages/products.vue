@@ -189,7 +189,7 @@ const getBadgeColor = (badge: string | null) => {
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div class="text-center max-w-3xl mx-auto">
           <span class="text-red-500 font-semibold text-sm uppercase tracking-wider">Our Products</span>
-          <h1 class="text-4xl md:text-5xl font-bold text-white mt-4 mb-6">
+          <h1 class="text-4xl md:text-5xl font-bold text-neutral-800 mt-4 mb-6">
             Latest Technology Products
           </h1>
           <p class="text-neutral-400 text-lg">
@@ -200,7 +200,7 @@ const getBadgeColor = (badge: string | null) => {
     </section>
     
     <!-- Category Filter -->
-    <section class="py-8 border-b border-neutral-800">
+    <section class="py-8 bg-neutral-800 border-b border-neutral-800">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="flex flex-wrap gap-3 justify-center">
           <UButton 
@@ -303,10 +303,10 @@ const getBadgeColor = (badge: string | null) => {
     </section>
     
     <!-- Featured Brands -->
-    <section class="py-16 bg-neutral-900/50">
+    <section class="py-16">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
-          <h2 class="text-2xl font-bold text-white mb-4">Trusted Brands We Carry</h2>
+          <h2 class="text-2xl font-bold text-neutral-800 mb-4">Trusted Brands We Carry</h2>
           <p class="text-neutral-400">We partner with the world's leading technology brands</p>
         </div>
         
@@ -360,12 +360,12 @@ const getBadgeColor = (badge: string | null) => {
     </section>
     
     <!-- CTA -->
-    <section class="py-16 bg-gradient-to-r from-red-950/50 via-red-900/30 to-red-950/50">
+    <section class="py-16 from-red-950/50 via-red-900/30 to-red-950/50">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="text-3xl font-bold text-white mb-4">
+        <h2 class="text-3xl font-bold text-neutral-800 mb-4">
           {"Can't Find What You're Looking For?"}
         </h2>
-        <p class="text-neutral-400 mb-8">
+        <p class="text-neutral-800 mb-8">
           Contact us and we will help you find the perfect product or source it for you.
         </p>
         <UButton 

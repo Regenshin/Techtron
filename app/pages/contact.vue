@@ -108,7 +108,7 @@ function toggleFaq(index: number) {
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div class="text-center max-w-3xl mx-auto">
           <span class="text-red-500 font-semibold text-sm uppercase tracking-wider">Contact Us</span>
-          <h1 class="text-4xl md:text-5xl font-bold text-white mt-4 mb-6">
+          <h1 class="text-4xl md:text-5xl font-bold text-neutral-800 mt-4 mb-6">
             {"Let's Connect"}
           </h1>
           <p class="text-neutral-400 text-lg">
@@ -124,7 +124,7 @@ function toggleFaq(index: number) {
         <div class="grid lg:grid-cols-3 gap-12">
           <!-- Contact Info -->
           <div class="lg:col-span-1">
-            <h2 class="text-2xl font-bold text-white mb-6">Get in Touch</h2>
+            <h2 class="text-2xl font-bold text-neutral-800 mb-6">Get in Touch</h2>
             
             <div class="space-y-6">
               <div 
@@ -136,11 +136,11 @@ function toggleFaq(index: number) {
                   <UIcon :name="info.icon" class="size-6 text-red-500" />
                 </div>
                 <div>
-                  <h3 class="text-white font-semibold mb-1">{{ info.title }}</h3>
+                  <h3 class="text-neutral-800 font-semibold mb-1">{{ info.title }}</h3>
                   <p 
                     v-for="detail in info.details" 
                     :key="detail"
-                    class="text-neutral-400 text-sm"
+                    class="text-neutral-600 text-sm"
                   >
                     {{ detail }}
                   </p>
@@ -285,30 +285,33 @@ function toggleFaq(index: number) {
     </section>
     
     <!-- Map Section -->
-    <section class="py-16 bg-neutral-900/50">
-      <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="text-center mb-8">
-          <h2 class="text-2xl font-bold text-white mb-2">Find Us</h2>
-          <p class="text-neutral-400">Visit our store for in-person service and support</p>
-        </div>
-        
-        <!-- Map placeholder -->
-        <div class="bg-neutral-900 border border-neutral-800 rounded-2xl h-96 flex items-center justify-center">
-          <div class="text-center">
-            <UIcon name="i-lucide-map" class="size-16 text-neutral-600 mx-auto mb-4" />
-            <p class="text-neutral-400">Interactive map would be displayed here</p>
-            <p class="text-neutral-500 text-sm mt-2">123 Tech Street, Innovation City</p>
-          </div>
-        </div>
-      </div>
-    </section>
+    <section class="py-16 bg-neutral-900">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="text-center mb-8">
+      <h2 class="text-2xl font-bold text-white mb-2">Find Us</h2>
+      <p class="text-neutral-400">Visit our store for in-person service and support</p>
+    </div>
+
+    <!-- Responsive Map -->
+    <div class="w-full h-[400px] md:h-[500px] rounded-2xl overflow-hidden shadow-lg">
+      <iframe 
+        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3793.7177221208935!2d-77.50945082481994!3d18.03829918296426!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x8edbbfa3941ca727%3A0x90876e6aff6cc3b!2sTechtron%20Live%20Phone%20Store!5e0!3m2!1sen!2sjm!4v1776790974795!5m2!1sen!2sjm"
+        class="w-full h-full border-0"
+        allowfullscreen=""
+        loading="lazy"
+        referrerpolicy="no-referrer-when-downgrade">
+      </iframe>
+    </div>
+
+  </div>
+</section>
     
     <!-- FAQs -->
     <section class="py-16">
       <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
           <span class="text-red-500 font-semibold text-sm uppercase tracking-wider">FAQs</span>
-          <h2 class="text-3xl font-bold text-white mt-4 mb-4">Frequently Asked Questions</h2>
+          <h2 class="text-3xl font-bold text-neutral-800 mt-4 mb-4">Frequently Asked Questions</h2>
         </div>
         
         <div class="space-y-4">
@@ -339,16 +342,16 @@ function toggleFaq(index: number) {
     </section>
     
     <!-- CTA -->
-    <section class="py-16 bg-gradient-to-r from-red-950/50 via-red-900/30 to-red-950/50">
+    <section class="py-16 from-red-950/50 via-red-900/30 to-red-950/50">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="text-3xl font-bold text-white mb-4">
+        <h2 class="text-3xl font-bold text-neutral-800 mb-4">
           Prefer to Talk Directly?
         </h2>
         <p class="text-neutral-400 mb-8">
           Give us a call and speak with one of our friendly team members right away.
         </p>
         <UButton 
-          label="Call +1 (555) 123-4567" 
+          label="Call +1 (876) 208-1629" 
           color="primary" 
           size="lg"
           icon="i-lucide-phone"

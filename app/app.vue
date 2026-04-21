@@ -41,7 +41,7 @@ const navItems = computed<NavigationMenuItem[]>(() => [
       </template>
     </UHeader>
 
-    <UMain class="bg-[#0a0a0a]">
+    <UMain class="bg-[#F8FAFC]">
       <NuxtPage />
     </UMain>
 

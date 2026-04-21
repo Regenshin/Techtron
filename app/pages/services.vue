@@ -132,7 +132,7 @@ const process = [
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div class="text-center max-w-3xl mx-auto">
           <span class="text-red-500 font-semibold text-sm uppercase tracking-wider">Our Services</span>
-          <h1 class="text-4xl md:text-5xl font-bold text-white mt-4 mb-6">
+          <h1 class="text-4xl md:text-5xl font-bold text-neutral-800 mt-4 mb-6">
             Expert Technology Solutions
           </h1>
           <p class="text-neutral-400 text-lg">
@@ -205,7 +205,7 @@ const process = [
     </section>
     
     <!-- Additional Services -->
-    <section class="py-16 bg-neutral-900/50">
+    <section class="py-16 bg-neutral-900">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
           <h2 class="text-3xl font-bold text-white mb-4">Additional Services</h2>
@@ -233,7 +233,7 @@ const process = [
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
           <span class="text-red-500 font-semibold text-sm uppercase tracking-wider">How It Works</span>
-          <h2 class="text-3xl font-bold text-white mt-4 mb-4">Our Simple Process</h2>
+          <h2 class="text-3xl font-bold text-neutral-800 mt-4 mb-4">Our Simple Process</h2>
           <p class="text-neutral-400">Getting your device fixed or service installed is easy</p>
         </div>
         
@@ -254,9 +254,9 @@ const process = [
     </section>
     
     <!-- CTA Section -->
-    <section class="py-16 bg-gradient-to-r from-red-950/50 via-red-900/30 to-red-950/50">
+    <section class="py-16 from-red-950/50 via-red-900/30 to-red-950/50">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="text-3xl font-bold text-white mb-4">
+        <h2 class="text-3xl font-bold text-neutral-800 mb-4">
           Need a Service Not Listed?
         </h2>
         <p class="text-neutral-400 mb-8">

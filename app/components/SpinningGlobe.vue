@@ -25,17 +25,17 @@ onMounted(() => {
     ctx.clearRect(0, 0, width, height)
     
     // Draw outer glow
-    const glow = ctx.createRadialGradient(centerX, centerY, radius * 0.8, centerX, centerY, radius * 1.3)
+   /*  const glow = ctx.createRadialGradient(centerX, centerY, radius * 0.8, centerX, centerY, radius * 1.3)
     glow.addColorStop(0, 'rgba(220, 38, 38, 0.3)')
     glow.addColorStop(1, 'rgba(220, 38, 38, 0)')
     ctx.fillStyle = glow
     ctx.beginPath()
     ctx.arc(centerX, centerY, radius * 1.3, 0, Math.PI * 2)
-    ctx.fill()
+    ctx.fill() */
     
     // Draw globe base
     const gradient = ctx.createRadialGradient(centerX - 40, centerY - 40, 0, centerX, centerY, radius)
-    gradient.addColorStop(0, '#3a3a3a')
+    gradient.addColorStop(0, '#ffffff')
     gradient.addColorStop(0.5, '#1a1a1a')
     gradient.addColorStop(1, '#0a0a0a')
     

@@ -6,7 +6,7 @@ useSeoMeta({
 
 const leadershipTeam = [
   {
-    name: 'James Mitchell',
+    name: 'Roshane Walters',
     role: 'Chief Executive Officer',
     bio: 'With over 15 years of experience in the technology industry, James founded Techtron Live with a vision to make quality tech services accessible to everyone.',
     image: '/placeholder-user.jpg',
@@ -108,7 +108,7 @@ const milestones = [
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <div class="text-center max-w-3xl mx-auto">
           <span class="text-red-500 font-semibold text-sm uppercase tracking-wider">About Us</span>
-          <h1 class="text-4xl md:text-5xl font-bold text-white mt-4 mb-6">
+          <h1 class="text-4xl md:text-5xl font-bold text-neutral-800 mt-4 mb-6">
             Powering Technology, Building Trust
           </h1>
           <p class="text-neutral-400 text-lg">
@@ -124,7 +124,7 @@ const milestones = [
         <div class="grid lg:grid-cols-2 gap-12 items-center">
           <div>
             <span class="text-red-500 font-semibold text-sm uppercase tracking-wider">Our Story</span>
-            <h2 class="text-3xl font-bold text-white mt-4 mb-6">
+            <h2 class="text-3xl font-bold text-neutral-800 mt-4 mb-6">
               From a Single Shop to a Trusted Brand
             </h2>
             <div class="space-y-4 text-neutral-400">
@@ -158,7 +158,7 @@ const milestones = [
     </section>
     
     <!-- Our Values -->
-    <section class="py-16 bg-neutral-900/50">
+    <section class="py-16 bg-neutral-900">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
           <span class="text-red-500 font-semibold text-sm uppercase tracking-wider">Our Values</span>
@@ -189,7 +189,7 @@ const milestones = [
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
           <span class="text-red-500 font-semibold text-sm uppercase tracking-wider">Our Team</span>
-          <h2 class="text-3xl font-bold text-white mt-4 mb-4">Meet Our Leadership</h2>
+          <h2 class="text-3xl font-bold text-neutral-800 mt-4 mb-4">Meet Our Leadership</h2>
           <p class="text-neutral-400 max-w-2xl mx-auto">
             The passionate professionals behind Techtron Live Limited who work tirelessly to deliver excellence.
           </p>
@@ -241,7 +241,7 @@ const milestones = [
     </section>
     
     <!-- Timeline / Milestones -->
-    <section class="py-16 bg-neutral-900/50">
+    <section class="py-16 bg-neutral-900">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="text-center mb-12">
           <span class="text-red-500 font-semibold text-sm uppercase tracking-wider">Our Journey</span>
@@ -289,22 +289,22 @@ const milestones = [
     <!-- Stats -->
     <section class="py-16">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="bg-gradient-to-r from-red-950/50 via-red-900/30 to-red-950/50 rounded-2xl p-8 lg:p-12">
+        <div class=" from-red-950/50 via-red-900/30 to-red-950/50 rounded-2xl p-8 lg:p-12">
           <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
             <div class="text-center">
-              <div class="text-4xl lg:text-5xl font-bold text-white mb-2">10K+</div>
+              <div class="text-4xl lg:text-5xl font-bold text-neutral-800 mb-2">10K+</div>
               <div class="text-neutral-400">Devices Repaired</div>
             </div>
             <div class="text-center">
-              <div class="text-4xl lg:text-5xl font-bold text-white mb-2">500+</div>
+              <div class="text-4xl lg:text-5xl font-bold text-neutral-800 mb-2">500+</div>
               <div class="text-neutral-400">Solar Installations</div>
             </div>
             <div class="text-center">
-              <div class="text-4xl lg:text-5xl font-bold text-white mb-2">25+</div>
+              <div class="text-4xl lg:text-5xl font-bold text-neutral-800 mb-2">25+</div>
               <div class="text-neutral-400">Team Members</div>
             </div>
             <div class="text-center">
-              <div class="text-4xl lg:text-5xl font-bold text-white mb-2">99%</div>
+              <div class="text-4xl lg:text-5xl font-bold text-neutral-800 mb-2">99%</div>
               <div class="text-neutral-400">Customer Satisfaction</div>
             </div>
           </div>
@@ -315,7 +315,7 @@ const milestones = [
     <!-- CTA -->
     <section class="py-16">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        <h2 class="text-3xl font-bold text-white mb-4">
+        <h2 class="text-3xl font-bold text-neutral-800 mb-4">
           Join the Techtron Family
         </h2>
         <p class="text-neutral-400 mb-8">

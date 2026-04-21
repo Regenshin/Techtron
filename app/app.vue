@@ -24,12 +24,12 @@ const navItems = computed<NavigationMenuItem[]>(() => [
       <UNavigationMenu :items="navItems" class="hidden lg:flex" />
 
       <template #right>
-        <UButton 
-          label="Get Quote" 
-          color="primary" 
-          to="/contact"
-          class="hidden sm:flex"
-        />
+        <NuxtLink to="/contact" class="hidden sm:flex">
+          <UButton 
+            label="Get Quote" 
+            color="primary"
+          />
+        </NuxtLink>
       </template>
 
       <template #body>

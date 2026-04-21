@@ -1,7 +1,15 @@
 <script setup lang="ts">
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 
 const canvasRef = ref<HTMLCanvasElement | null>(null)
+
+// Make canvas responsive
+const canvasSize = computed(() => {
+  if (process.client) {
+    return window.innerWidth < 640 ? 300 : 400
+  }
+  return 400
+})
 
 onMounted(() => {
   if (!canvasRef.value) return
@@ -10,11 +18,11 @@ onMounted(() => {
   const ctx = canvas.getContext('2d')
   if (!ctx) return
   
-  const width = canvas.width = 400
-  const height = canvas.height = 400
+  const width = canvas.width = canvasSize.value
+  const height = canvas.height = canvasSize.value
   const centerX = width / 2
   const centerY = height / 2
-  const radius = 150
+  const radius = width * 0.375 // 150/400 = 0.375
   
   let rotation = 0
   
@@ -23,15 +31,6 @@ onMounted(() => {
     
     // Clear canvas
     ctx.clearRect(0, 0, width, height)
-    
-    // Draw outer glow
-   /*  const glow = ctx.createRadialGradient(centerX, centerY, radius * 0.8, centerX, centerY, radius * 1.3)
-    glow.addColorStop(0, 'rgba(220, 38, 38, 0.3)')
-    glow.addColorStop(1, 'rgba(220, 38, 38, 0)')
-    ctx.fillStyle = glow
-    ctx.beginPath()
-    ctx.arc(centerX, centerY, radius * 1.3, 0, Math.PI * 2)
-    ctx.fill() */
     
     // Draw globe base
     const gradient = ctx.createRadialGradient(centerX - 40, centerY - 40, 0, centerX, centerY, radius)
@@ -139,32 +138,32 @@ onMounted(() => {
 </script>
 
 <template>
-  <div class="relative">
+  <div class="relative w-full max-w-sm mx-auto lg:max-w-md">
     <canvas 
       ref="canvasRef" 
-      width="400" 
-      height="400"
-      class="mx-auto"
+      :width="canvasSize"
+      :height="canvasSize"
+      class="w-full h-auto max-w-full"
     />
     <!-- Floating tech icons around globe -->
     <div class="absolute top-4 left-1/4 animate-bounce" style="animation-delay: 0s; animation-duration: 3s;">
-      <div class="w-10 h-10 bg-neutral-900 border border-red-500/30 rounded-lg flex items-center justify-center">
-        <UIcon name="i-lucide-smartphone" class="size-5 text-red-500" />
+      <div class="w-8 h-8 sm:w-10 sm:h-10 bg-neutral-900 border border-red-500/30 rounded-lg flex items-center justify-center">
+        <UIcon name="i-lucide-smartphone" class="size-4 sm:size-5 text-red-500" />
       </div>
     </div>
     <div class="absolute top-1/4 right-4 animate-bounce" style="animation-delay: 0.5s; animation-duration: 3s;">
-      <div class="w-10 h-10 bg-neutral-900 border border-red-500/30 rounded-lg flex items-center justify-center">
-        <UIcon name="i-lucide-laptop" class="size-5 text-red-500" />
+      <div class="w-8 h-8 sm:w-10 sm:h-10 bg-neutral-900 border border-red-500/30 rounded-lg flex items-center justify-center">
+        <UIcon name="i-lucide-laptop" class="size-4 sm:size-5 text-red-500" />
       </div>
     </div>
     <div class="absolute bottom-1/4 left-4 animate-bounce" style="animation-delay: 1s; animation-duration: 3s;">
-      <div class="w-10 h-10 bg-neutral-900 border border-red-500/30 rounded-lg flex items-center justify-center">
-        <UIcon name="i-lucide-sun" class="size-5 text-red-500" />
+      <div class="w-8 h-8 sm:w-10 sm:h-10 bg-neutral-900 border border-red-500/30 rounded-lg flex items-center justify-center">
+        <UIcon name="i-lucide-sun" class="size-4 sm:size-5 text-red-500" />
       </div>
     </div>
     <div class="absolute bottom-4 right-1/4 animate-bounce" style="animation-delay: 1.5s; animation-duration: 3s;">
-      <div class="w-10 h-10 bg-neutral-900 border border-red-500/30 rounded-lg flex items-center justify-center">
-        <UIcon name="i-lucide-camera" class="size-5 text-red-500" />
+      <div class="w-8 h-8 sm:w-10 sm:h-10 bg-neutral-900 border border-red-500/30 rounded-lg flex items-center justify-center">
+        <UIcon name="i-lucide-camera" class="size-4 sm:size-5 text-red-500" />
       </div>
     </div>
   </div>

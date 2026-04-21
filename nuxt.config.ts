@@ -11,7 +11,8 @@ export default defineNuxtConfig({
     head: {
       title: 'Techtron Live Limited',
       meta: [
-        { name: 'description', content: 'Your trusted partner for phone repairs, laptop repairs, solar panel installation, camera systems, and the latest technology.' }
+        { name: 'description', content: 'Your trusted partner for phone repairs, laptop repairs, solar panel installation, camera systems, and the latest technology.' },
+        { name: 'viewport', content: 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no' }
       ],
       link: [
         { rel: 'icon', type: 'image/x-icon', href: '/Logo.ico' }

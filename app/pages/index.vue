@@ -72,10 +72,10 @@ const testimonials = [
     <section class="relative overflow-hidden py-12 lg:py-20">
       <!-- Background effects -->
       <div class="absolute inset-0 from-red-950/20 via-transparent to-transparent" />
-      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[800px]  rounded-full blur-3xl" />
+      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] sm:w-[800px] sm:h-[800px] rounded-full blur-3xl" />
       
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div class="grid lg:grid-cols-2 gap-12 items-center">
+        <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           <!-- Content -->
           <div class="text-center lg:text-left">
             <div class="inline-flex items-center gap-2 px-4 py-2 bg-red-600/10 border border-red-600/20 rounded-full mb-6">
@@ -83,14 +83,14 @@ const testimonials = [
               <span class="text-red-400 text-sm font-medium">Now Serving Nationwide</span>
             </div>
             
-            <h1 class="text-4xl sm:text-5xl lg:text-6xl font-bold text-black leading-tight mb-6">
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-black leading-tight mb-6">
               Powering Your
               <span class="text-red-500">Digital</span>
               <br />
               World Forward
             </h1>
             
-            <p class="text-lg text-neutral-400 mb-8 max-w-xl mx-auto lg:mx-0">
+            <p class="text-base sm:text-lg text-neutral-400 mb-8 max-w-xl mx-auto lg:mx-0">
               From smartphone repairs to solar installations, Techtron Live Limited delivers comprehensive technology solutions you can trust. Experience reliability at its finest.
             </p>
             
@@ -114,7 +114,7 @@ const testimonials = [
           </div>
           
           <!-- Globe -->
-          <div class="flex justify-center lg:justify-end">
+          <div class="flex justify-center lg:justify-end mt-8 lg:mt-0">
             <SpinningGlobe />
           </div>
         </div>

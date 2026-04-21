@@ -51,7 +51,7 @@ const navItems = computed<NavigationMenuItem[]>(() => [
           <!-- Brand -->
           <div class="md:col-span-1">
             <NuxtLink to="/" class="flex items-center gap-3 mb-4">
-              <img src="/logo.png" alt="Techtron Live Limited" class="h-28 w-auto" />
+              <img src="/Logo.png" alt="Techtron Live Limited" class="h-28 w-auto" />
             </NuxtLink>
             <p class="text-neutral-400 text-sm">
               Your trusted partner for all technology solutions. Building reliability, one device at a time.

@@ -152,7 +152,7 @@ function toggleFaq(index: number) {
             <div class="mt-8">
               <h3 class="text-white font-semibold mb-4">Follow Us</h3>
               <div class="flex gap-3">
-                <UButton to="" icon="i-simple-icons-tiktok" color="neutral" variant="outline" />
+                <UButton icon="i-simple-icons-tiktok" color="neutral" variant="outline" disabled />
                 <UButton to="https://www.instagram.com/techtron_live?igsh=MWE4emsxOTl3dHk3aA==" icon="i-simple-icons-instagram" color="neutral" variant="outline" />
                 
               </div>
@@ -304,6 +304,8 @@ function toggleFaq(index: number) {
     </div>
 
   </div>
+
+  
 </section>
     
     <!-- FAQs -->

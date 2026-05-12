@@ -9,7 +9,7 @@ const leadershipTeam = [
     name: 'Roshane Walters',
     role: 'Chief Executive Officer',
     bio: 'With over 15 years of experience in the technology industry, James founded Techtron Live with a vision to make quality tech services accessible to everyone.',
-    image: '/placeholder-user.jpg',
+    image: 'https://fhi.duke.edu/sites/default/files/styles/focal_point_large/public/LOB_MAN_SQUARE.png?h=a6e99d5e&itok=MvSf706p',
     social: {
       linkedin: '#',
       twitter: '#'
@@ -29,7 +29,7 @@ const leadershipTeam = [
     name: 'Michael Chen',
     role: 'Chief Technology Officer',
     bio: 'Michael leads our technical team with expertise in mobile technology, solar systems, and security solutions. He ensures we stay at the forefront of innovation.',
-    image: '/placeholder-user.jpg',
+    image: 'https://media.istockphoto.com/id/1289461335/photo/portrait-of-a-handsome-black-man.jpg?s=612x612&w=0&k=20&c=gDibbpmkeV04ta3ociwAgpqcjdeU5sI1nnd78wrnz-g=',
     social: {
       linkedin: '#',
       twitter: '#'
@@ -49,7 +49,7 @@ const leadershipTeam = [
     name: 'David Kim',
     role: 'Lead Repair Technician',
     bio: 'David brings 10 years of hands-on experience in device repair. He trains our technicians and maintains our high quality standards.',
-    image: '/placeholder-user.jpg',
+    image: 'https://img.freepik.com/premium-photo/man-white-suit-black-pocket-square_1257035-3442.jpg?semt=ais_hybrid&w=740&q=80',
     social: {
       linkedin: '#',
       twitter: '#'
@@ -129,13 +129,13 @@ const milestones = [
             </h2>
             <div class="space-y-4 text-neutral-400">
               <p>
-                Techtron Live Limited began in 2019 with a simple mission: to provide honest, reliable, and affordable technology services to our community. What started as a small repair shop has grown into a comprehensive technology solutions provider.
+               Techtron Live Limited was founded in 2019 and has rapidly established itself as a trusted technology solutions provider, delivering reliable, affordable, and innovative services to customers across Jamaica. What began as a small device repair operation has evolved into a dynamic company offering a wide range of modern technology and energy solutions for homes and businesses alike.
               </p>
               <p>
-                Over the years, we have expanded our services to include solar panel installation, security systems, and a full range of the latest technology products. Our growth has been fueled by one thing - the trust of our customers.
+                Today, Techtron Live Limited encompasses several specialized service divisions, including computer and mobile device repairs, security system installation, air conditioning (AC) installation and maintenance, solar energy system installation, and the supply of the latest technology products and accessories. Through professional service, technical expertise, and customer-focused support, the company continues to strengthen its reputation as a dependable partner in the technology and renewable energy industries.
               </p>
               <p>
-                Today, we serve thousands of customers across the region, but our commitment remains the same: to treat every device as if it were our own, and every customer as part of our family.
+                Driven by a commitment to quality and customer satisfaction, Techtron Live Limited proudly serves thousands of customers throughout the region. The company remains dedicated to treating every project with care and professionalism while helping to power and protect homes and businesses through advanced technology, efficient cooling solutions, and sustainable solar energy systems.
               </p>
             </div>
           </div>
@@ -143,7 +143,7 @@ const milestones = [
           <div class="relative">
             <div class="bg-neutral-900 border border-neutral-800 rounded-2xl p-4 glow-red">
               <img 
-                src="/placeholder.jpg" 
+                src="https://static.vecteezy.com/system/resources/thumbnails/017/153/701/small/technician-repairing-inside-of-mobile-phone-integrated-circuit-the-concept-of-data-hardware-technology-photo.jpg" 
                 alt="Techtron Live team"
                 class="rounded-xl w-full h-auto"
               />

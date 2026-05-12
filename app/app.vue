@@ -13,7 +13,7 @@ const navItems = computed<NavigationMenuItem[]>(() => [
 
 <template>
   <UApp>
-    <UHeader class="bg-[#0a0a0a] border-b border-neutral-800 h-30">
+    <UHeader class="bg-neutral-900 border-b border-neutral-800 h-30">
       <template #title>
         <NuxtLink to="/" class="flex items-center gap-3">
            <img src="/Logo.png" alt="Techtron Live Limited" class="h-28 w-auto" />
@@ -45,7 +45,7 @@ const navItems = computed<NavigationMenuItem[]>(() => [
       <NuxtPage />
     </UMain>
 
-    <footer class="bg-[#0a0a0a] border-t border-neutral-800">
+    <footer class="bg-neutral-900 border-t border-neutral-800">
       <div class="max-w-7xl mx-auto px-4 py-12">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
           <!-- Brand -->
@@ -114,8 +114,8 @@ const navItems = computed<NavigationMenuItem[]>(() => [
             © {{ new Date().getFullYear() }} Techtron Live Limited. All rights reserved.
           </p>
           <div class="flex gap-6 text-neutral-400 text-sm">
-            <NuxtLink to="#" class="hover:text-red-500 transition-colors">Privacy Policy</NuxtLink>
-            <NuxtLink to="#" class="hover:text-red-500 transition-colors">Terms of Service</NuxtLink>
+            <a href="javascript:void(0)" class="hover:text-red-500 transition-colors cursor-default">Privacy Policy</a>
+            <a href="javascript:void(0)" class="hover:text-red-500 transition-colors cursor-default">Terms of Service</a>
           </div>
         </div>
       </div>

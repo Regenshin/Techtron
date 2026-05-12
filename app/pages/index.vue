@@ -122,7 +122,7 @@ const testimonials = [
     </section>
     
     <!-- Stats Section -->
-    <section class="py-12 bg-black border-y border-neutral-800">
+    <section class="py-12 bg-neutral-900 border-y border-neutral-800">
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
           <div 
@@ -226,7 +226,7 @@ const testimonials = [
           <div class="relative">
             <div class="bg-neutral-900 border border-neutral-800 rounded-2xl p-8 glow-red">
               <img 
-                src="/placeholder.jpg" 
+                src="https://www.shutterstock.com/image-photo/confident-guy-happy-black-man-600nw-2522055013.jpg" 
                 alt="Techtron Live technician at work"
                 class="rounded-xl w-full h-auto"
               />

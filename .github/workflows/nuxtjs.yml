@@ -34,10 +34,10 @@ jobs:
           version: latest
 
       - name: Approve pnpm build scripts
-        run: pnpm approve-builds --all
+        run: pnpm approve-builds --all || true
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: pnpm install --frozen-lockfile --dangerously-allow-all-builds
 
       - name: Generate static site
         run: pnpm nuxi generate

@@ -19,7 +19,7 @@ const leadershipTeam = [
     name: 'Sarah Anderson',
     role: 'Chief Operations Officer',
     bio: 'Sarah oversees all operational aspects of Techtron Live, ensuring seamless service delivery and customer satisfaction across all departments.',
-    image: '/placeholder-user.jpg',
+    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTUqWJtRsEmNYUBJHtCSRYAHdjaalz7ALNCXg&s',
     social: {
       linkedin: '#',
       twitter: '#'
@@ -39,7 +39,7 @@ const leadershipTeam = [
     name: 'Emily Rodriguez',
     role: 'Head of Customer Experience',
     bio: 'Emily is passionate about creating exceptional customer journeys. She has built our customer support team from the ground up.',
-    image: '/placeholder-user.jpg',
+    image: 'https://t3.ftcdn.net/jpg/03/62/50/16/360_F_362501638_FimxwTbbGUoRtjaypXDPGAyYCFvfvYy0.jpg',
     social: {
       linkedin: '#',
       twitter: '#'
@@ -59,7 +59,7 @@ const leadershipTeam = [
     name: 'Lisa Thompson',
     role: 'Solar Solutions Director',
     bio: 'Lisa heads our renewable energy division, bringing expertise in solar installation and sustainable technology solutions.',
-    image: '/placeholder-user.jpg',
+    image: 'https://img.magnific.com/free-photo/smiling-happy-woman-standing-white-casual-t-shirt-grey_176420-20793.jpg?semt=ais_hybrid&w=740&q=80',
     social: {
       linkedin: '#',
       twitter: '#'

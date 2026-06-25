@@ -1,0 +1,259 @@
+Project Structure — What each part does
+
+app: The application entry and file-based routing.
+app.vue: The root application shell—global wrappers and top-level layout insertion. Modify here to change global wrappers or root-level providers.
+main.css: Global CSS and base styles; update global colors, typographic scales, and utility classes here.
+SpinningGlobe.vue: Example page-level component used somewhere in pages—open this to change that visual widget.
+app/pages/*.vue: File-based routes. Examples in this repo: index.vue, about.vue, contact.vue, products.vue, services.vue. Add or edit these to change page content or add new routes.
+components: Project-wide components and UI system.
+theme-provider.tsx: Theme provider used across app for theme context and CSS variables. Edit to change theme logic or default theme values.
+ui: A set of small, reusable UI primitives (buttons, inputs, cards, dialogs, etc.). Examples: button.tsx, input.tsx, card.tsx.
+These are meant to be composable building blocks—change them to globally adjust a primitive's appearance or accessibility behavior.
+hooks
+use-mobile.ts: A composable to detect mobile view or features—update logic here if breakpoints or device detection changes.
+use-toast.ts: Central toast/notification helper—adjust timing, placement, or underlying toast engine here.
+public: Static assets served as-is (images, icons, static files). Replace or add files here for assets that don't need bundling.
+Root config files
+nuxt.config.ts: App configuration—plugins, modules, runtime config, global CSS inclusion, Nitro config. Change build-time behavior, enable modules, configure runtime keys here.
+package.json: Scripts, dependencies, and project metadata. Edit scripts or add tools (linters, test runners, etc.) here.
+pnpm-lock.yaml: Lockfile for reproducible installs—do not edit manually.
+**How the site is composed at runtime (explain flows)
+
+Routing & pages: Nuxt uses file-based routing—each file in pages becomes a route. Dynamic routes use bracketed names, e.g., app/pages/products/[id].vue yields /products/:id.
+Layout & app shell: app.vue wraps pages and mounts providers (theme, toasts, auth wrappers). Shared navigation/footer are usually either inside app.vue or in a layouts/ file if present.
+Components usage: Pages import UI primitives from ui (e.g., Button, Card) or local components in components. The theme-provider.tsx exposes theme props and CSS variables used by UI primitives.
+Client vs Server code: Put server-only logic (DB access, secrets usage) in server/ or server/api/. Client-only code (DOM, window) should use if (process.client) guards or onMounted() hooks.
+**Where to change common UI elements
+
+Site title & meta: Use useHead() in each page. For global defaults, edit nuxt.config.ts (app.head or runtimeConfig.public usage).
+Navigation: Likely defined in app.vue or a shared header component in components—edit links and labels in those files.
+Footer: Look for a Footer component either in components or inside app.vue. Modify markup or add social links there.
+Logo / Brand: Stored in public or inside assets; update the file and any img tags in header components.
+Theme variables: Edit theme-provider.tsx and main.css to change color tokens and font sizes globally.
+Forms & inputs: Edit the UI primitives in input.tsx to change validation display, aria attributes, or base styling.
+**UI primitives overview
+
+Buttons (button.tsx): Expose variants (primary, ghost, icon). Modify props to change behavior or CSS classes to change styling site-wide.
+Forms (form.tsx, field.tsx): Centralize validation styling and label behavior. Hook Zod or other validators at the server APIs for robust validation.
+Modals & dialogs (dialog.tsx): Control focus trapping, aria attributes, and animation here for accessibility.
+Toasts (toaster.tsx + use-toast.ts): Central entrypoints for ephemeral messages—change timing/position in the hook.
+**Server/API & Data flow
+
+This repo appears frontend-first. If you add database-backed APIs, put them in server/api/ as Nitro endpoints (e.g., server/api/items.post.ts) and call them from pages using useFetch() or useAsyncData().
+Keep DB credentials in environment variables and access them via useRuntimeConfig().
+**Risks & Concrete Fixes (explained simply)
+
+Risk: XSS from user content
+Why it’s dangerous: Malicious input can run scripts in visitors’ browsers.
+Fix: Sanitize on input and escape on render; use server-side validation with zod; avoid injecting raw HTML unless sanitized.
+Example: Use zod to validate payloads on server endpoints and never render raw innerHTML without sanitization.
+Risk: Secrets in client bundle
+Why: Exposed API keys compromise services.
+Fix: Keep secrets in environment variables and runtimeConfig (private vs public). Access private secrets only on server-side.
+Example: Put DB URL in .env and reference via useRuntimeConfig().dbUrl only inside server endpoints.
+Risk: Broken auth / insecure token storage
+Project Documentation — Techtron
+
+Purpose
+This document explains how the Techtron Nuxt 3 website is organized, how each element works, where to change things, the main risks with fixes, and step-by-step scalability instructions (adding a database and creating new pages and APIs). Use it as a single reference when modifying or expanding the app.
+
+Repository entry points
+- `nuxt.config.ts` — application configuration: modules, build options, runtime config, global CSS.
+- `package.json` — scripts, dependencies.
+- `pnpm-lock.yaml` — lockfile for reproducible installs (do not edit manually).
+
+Top-level structure and purpose
+- `app/`
+  - `app.vue` — root app shell. Contains global wrappers (theme provider, toasts, nav/footer). Edit to change global layout elements and providers.
+  - `assets/css/main.css` — global styles and utility classes.
+  - `components/SpinningGlobe.vue` — an example visual component used by pages.
+  - `pages/*.vue` — the file-based routes. In this repo: `index.vue`, `about.vue`, `contact.vue`, `products.vue`, `services.vue`.
+
+- `components/`
+  - `theme-provider.tsx` — theme context provider (CSS variables, color modes). Change to alter global theming behavior or defaults.
+  - `ui/` — UI primitives and small reusable components (button.tsx, input.tsx, card.tsx, dialog.tsx, etc.). Modify these to update the look-and-feel or accessibility behavior across the site.
+
+- `hooks/`
+  - `use-mobile.ts` — composable for mobile detection.
+  - `use-toast.ts` — central toast API.
+
+- `public/` — static assets (images/icons) served directly by the server or CDN.
+
+How the pieces work together (runtime flows)
+- Routing: Nuxt file-based routing — each file in `app/pages` maps to a route. Dynamic segments use `[param]` files.
+- Layout & providers: `app.vue` wraps routes and mounts global providers (theme, toasts). Per-page `useHead()` customizes meta.
+- UI primitives: Pages import `components/ui/*` primitives to compose layouts. Update a primitive to change it site-wide.
+- Data & APIs: This repo currently contains no server DB integration. Add server endpoints under `server/api/` and call them via `useFetch()` or `$fetch()` from pages.
+
+Where to change common elements
+- Site title and defaults: edit `nuxt.config.ts` or set per-page `useHead()`.
+- Navigation: look in `app/app.vue` or `components/` for a Header/Nav component.
+- Footer: check `app/app.vue` or a `Footer` component in `components/`.
+- Logo: `public/` or `app/assets/` — replace files there and update `img` tags.
+- Colors/typography: `components/theme-provider.tsx` and `app/assets/css/main.css`.
+- Forms: update styling and behavior in `components/ui/input.tsx` and the page-level form code in `app/pages/*`.
+
+UI primitives summary (what to edit for changes)
+- `components/ui/button.tsx` — change button variants, sizes, and aria defaults.
+- `components/ui/input.tsx` — edit validation display and accessibility props.
+- `components/ui/dialog.tsx` — edit focus trap, aria attributes, and animations.
+- `components/ui/toaster.tsx` + `hooks/use-toast.ts` — modify toast timings, placement.
+
+Risks, why they matter, and exact fixes
+1) Input validation & injection (XSS / SQL injection)
+   - Why: Unsanitized user input can execute scripts or break backend queries.
+   - Fix: Validate on server and client. Use `zod`/`joi` to validate incoming payloads in `server/api/*.ts`. Escape or sanitize any HTML before rendering.
+   - Example server validation snippet:
+     import { z } from 'zod'
+     const schema = z.object({ name: z.string().min(1) })
+     const body = schema.parse(await readBody(event))
+
+2) Secrets leakage
+   - Why: Exposed keys in repo or client bundle compromise services.
+   - Fix: Use environment variables, store only public keys in `runtimeConfig.public`, keep private values in `runtimeConfig` (server only). Never import secrets in client code.
+   - Example `nuxt.config.ts` usage:
+     export default defineNuxtConfig({ runtimeConfig: { dbUrl: process.env.DB_URL, public: { apiBase: process.env.PUBLIC_API_BASE } } })
+
+3) Authentication & session management
+   - Why: Insecure token storage (localStorage) is vulnerable to XSS.
+   - Fix: Use HTTP-only cookies for tokens or server-side session stores (Redis). Validate authorization on server API endpoints.
+   - Example to set HTTP-only cookie:
+     setCookie(event, 'token', token, { httpOnly: true, sameSite: 'lax', secure: true })
+
+4) Large client bundles and slow loads
+   - Why: Heavy libraries hurt performance and UX.
+   - Fix: Dynamically import heavy components, remove unused libs, enable image optimizations, use CDN and compression.
+   - Example lazy import:
+     const LazyComp = defineAsyncComponent(() => import('~/components/Heavy.vue'))
+
+5) Database connection limits (if adding DB)
+   - Why: Serverless environments can open many connections and hit DB limits.
+   - Fix: Use PgBouncer or serverless-friendly Postgres (Neon), or use connection pooling in your ORM.
+
+6) Accessibility issues
+   - Why: Users with assistive tech need semantic markup and ARIA.
+   - Fix: Use semantic HTML, aria-* attributes in primitives, test with axe and Lighthouse.
+
+Concrete server-side fixes and middleware examples
+- Content Security Policy (CSP) middleware (server/middleware/csp.global.ts):
+  export default defineEventHandler((event) => {
+    setHeader(event, 'Content-Security-Policy', "default-src 'self'; img-src 'self' data:;")
+  })
+
+- Example server endpoint with validation (server/api/submit.post.ts):
+  import { z } from 'zod'
+  export default defineEventHandler(async (event) => {
+    const schema = z.object({ name: z.string().min(1) })
+    const body = schema.parse(await readBody(event))
+    // process safely
+    return { success: true }
+  })
+
+Scalability — adding a database (Prisma + Postgres example)
+Overview: choose a provider (Supabase, Neon, RDS). For typed DB access locally and safety, Prisma + Postgres is a common choice.
+
+Step-by-step (local dev -> production-ready):
+1) Add packages
+   pnpm add -D prisma
+   pnpm add @prisma/client
+   npx prisma init
+
+2) Set `DATABASE_URL` in `.env` and in your deployment secrets.
+
+3) Define `prisma/schema.prisma` (example):
+   datasource db {
+     provider = "postgresql"
+     url      = env("DATABASE_URL")
+   }
+   generator client {
+     provider = "prisma-client-js"
+   }
+   model Item {
+     id    Int     @id @default(autoincrement())
+     name  String
+     desc  String?
+   }
+
+4) Migrate & generate client
+   npx prisma migrate dev --name init
+   npx prisma generate
+
+5) Create a safe singleton Prisma client for Nuxt server code
+   // server/utils/prisma.ts
+   import { PrismaClient } from '@prisma/client'
+   declare global { var prisma: PrismaClient | undefined }
+   export const prisma = global.prisma ?? new PrismaClient()
+   if (process.env.NODE_ENV !== 'production') global.prisma = prisma
+
+6) Use Prisma in server endpoints only
+   // server/api/items.get.ts
+   export default defineEventHandler(async () => {
+     return await prisma.item.findMany()
+   })
+
+   // server/api/items.post.ts
+   import { z } from 'zod'
+   export default defineEventHandler(async (event) => {
+     const body = z.object({ name: z.string().min(1), desc: z.string().optional() }).parse(await readBody(event))
+     const item = await prisma.item.create({ data: body })
+     return item
+   })
+
+Notes on deployment & pooling
+- On serverless (Vercel, Netlify), use a connection pooler or serverless-friendly DB. Use PgBouncer for RDS, or choose Neon/Supabase which handle connection scaling.
+- Keep `DATABASE_URL` in deployment secrets, and ensure your CI secrets are configured for migrations.
+
+Creating new pages and APIs (Nuxt 3 patterns)
+1) Add a page
+   - Create `app/pages/newpage.vue` with template and `useHead()` for meta.
+   - Link from nav with `<NuxtLink to="/newpage">New</NuxtLink>`.
+
+2) Add a dynamic page
+   - `app/pages/products/[id].vue` -> route `/products/:id`.
+
+3) Add an API endpoint
+   - Create `server/api/example.post.ts` and `server/api/example.get.ts`.
+   - Validate input with `zod` in POST handlers.
+   - Call DB (Prisma) or external services inside these files.
+
+4) Consume APIs from pages
+   - Use `useFetch('/api/items')` or `$fetch('/api/items')` inside `async setup()` or `useAsyncData()`.
+
+Local developer commands
+- Install dependencies:
+  pnpm install
+- Run dev server:
+  pnpm dev
+- Build for production:
+  pnpm build
+  pnpm start
+- Audit dependencies:
+  pnpm audit
+
+Quick static audits and monitoring
+- Run `pnpm audit` and fix critical vulnerabilities with `pnpm up <package>` or via Dependabot.
+- Lighthouse: install Chrome Lighthouse CLI or use browser devtools. From the command line:
+  npm i -g lighthouse
+  lighthouse http://localhost:3000 --output html --output-path ./lighthouse-report.html
+
+- Accessibility: run `axe` in CI or use Lighthouse accessibility audits.
+
+Operational checklist before production
+- Ensure no secrets in repo; set up deployment secrets.
+- Add Sentry for error reporting and a metrics provider (Datadog/NewRelic) for tracing.
+- Configure DB backups and test restore.
+- Run `pnpm build` and confirm no server-only libs were included in client bundle.
+- Run Lighthouse and fix major performance and accessibility issues.
+
+Example next steps I can do for you (optional)
+- Scaffold a `server/utils/prisma.ts` and a sample `server/api/items.*.ts` in the repo.
+- Run `pnpm audit` in this workspace and return a prioritized vulnerability list.
+
+File references
+- Edit global app shell: app/app.vue
+- Edit pages: app/pages/*.vue
+- Edit UI primitives: components/ui/*.tsx
+- Edit theme: components/theme-provider.tsx
+- Add server endpoints: server/api/*.ts
+
+End of documentation.

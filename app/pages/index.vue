@@ -250,7 +250,7 @@ const testimonials = [
             What Our Customers Say
           </h2>
           <p class="text-neutral-400 max-w-2xl mx-auto">
-            {"Don't just take our word for it. Here's what our satisfied customers have to say about their experience."}
+            Don't just take our word for it. Here's what our satisfied customers have to say about their experience.
           </p>
         </div>
         

@@ -92,6 +92,17 @@ Where to change common elements
 - Logo: `public/` or `app/assets/` — replace files there and update `img` tags.
 - Colors/typography: `components/theme-provider.tsx` and `app/assets/css/main.css`.
 - Forms: update styling and behavior in `components/ui/input.tsx` and the page-level form code in `app/pages/*`.
+- Contact form integration: `app/pages/contact.vue` now posts contact submissions to `https://api.web3forms.com/submit` using `runtimeConfig.public.web3formsAccessKey`.
+
+Web3Forms contact form details:
+- Form validation is performed client-side with Zod in `app/pages/contact.vue`.
+- The submit handler builds a payload with `access_key`, `subject`, `name`, `email`, `phone`, `service`, and `message`.
+- The payload is sent via `fetch()` to the Web3Forms API endpoint.
+- A successful response sets `isSubmitted` and clears the form state.
+- The key is read from `.env` via `nuxt.config.ts` as `WEB3FORMS_ACCESS_KEY` and exposed in `runtimeConfig.public.web3formsAccessKey`.
+- If the access key is missing in `.env`, the page logs a warning in the browser console.
+
+Important note: this key is currently exposed as public runtime config, so for stricter security you may want to proxy submissions through a server-side API endpoint instead.
 
 UI primitives summary (what to edit for changes)
 - `components/ui/button.tsx` — change button variants, sizes, and aria defaults.
@@ -204,20 +215,85 @@ Notes on deployment & pooling
 - Keep `DATABASE_URL` in deployment secrets, and ensure your CI secrets are configured for migrations.
 
 Creating new pages and APIs (Nuxt 3 patterns)
-1) Add a page
-   - Create `app/pages/newpage.vue` with template and `useHead()` for meta.
-   - Link from nav with `<NuxtLink to="/newpage">New</NuxtLink>`.
 
-2) Add a dynamic page
-   - `app/pages/products/[id].vue` -> route `/products/:id`.
+STEP-BY-STEP: Adding a new page with navigation
+1) Create the page file
+   - Create a new file under `app/pages/` with a `.vue` extension (e.g., `app/pages/blog.vue` for a `/blog` route).
+   - File structure example:
+     <template>
+       <div class="max-w-7xl mx-auto px-4 py-12">
+         <h1 class="text-3xl font-bold">Blog</h1>
+         <p>Blog content goes here</p>
+       </div>
+     </template>
+     <script setup>
+     useHead({ title: 'Blog — Techtron', meta: [{ name: 'description', content: 'Read our latest blog posts' }] })
+     </script>
 
-3) Add an API endpoint
-   - Create `server/api/example.post.ts` and `server/api/example.get.ts`.
-   - Validate input with `zod` in POST handlers.
-   - Call DB (Prisma) or external services inside these files.
+2) Update the navigation in app/app.vue
+   - Open `app/app.vue` (root app shell).
+   - Find the `navItems` computed array around line 4-10:
+     const navItems = computed<NavigationMenuItem[]>(() => [
+       { label: 'Home', to: '/' },
+       { label: 'Services', to: '/services' },
+       { label: 'Products', to: '/products' },
+       { label: 'About Us', to: '/about' },
+       { label: 'Contact', to: '/contact' }
+     ])
+   - Add your new page link to this array. Example for a Blog page:
+     const navItems = computed<NavigationMenuItem[]>(() => [
+       { label: 'Home', to: '/' },
+       { label: 'Services', to: '/services' },
+       { label: 'Products', to: '/products' },
+       { label: 'About Us', to: '/about' },
+       { label: 'Blog', to: '/blog' },
+       { label: 'Contact', to: '/contact' }
+     ])
 
-4) Consume APIs from pages
-   - Use `useFetch('/api/items')` or `$fetch('/api/items')` inside `async setup()` or `useAsyncData()`.
+3) Test the navigation
+   - Run `pnpm dev` in your terminal.
+   - Visit http://localhost:3000 and verify the new link appears in both desktop and mobile navigation.
+   - Click the link to confirm it routes to your new page.
+
+4) (Optional) Add the page to other navigation areas
+   - If there's a footer navigation (in `app/app.vue` around lines 50-75), you may want to add the page link there too.
+   - Example in footer links section:
+     <a href="/blog" class="text-gray-400 hover:text-white">Blog</a>
+
+DYNAMIC PAGES (pages with parameters)
+1) Create a dynamic page
+   - File name uses square brackets: `app/pages/products/[id].vue` -> route `/products/:id`.
+   - Access the parameter via `const route = useRoute()`, then `route.params.id`.
+   - Example:
+     <template>
+       <div>
+         <h1>Product {{ route.params.id }}</h1>
+       </div>
+     </template>
+     <script setup>
+     const route = useRoute()
+     </script>
+
+2) Add dynamic links in the nav (if applicable)
+   - Only static links appear in the top nav. For dynamic routes, link from other pages using `<NuxtLink>`.
+
+API ENDPOINTS
+1) Add a server endpoint
+   - Create `server/api/example.post.ts` (for POST) or `server/api/example.get.ts` (for GET).
+   - Example POST endpoint:
+     import { z } from 'zod'
+     export default defineEventHandler(async (event) => {
+       const schema = z.object({ name: z.string().min(1) })
+       const body = schema.parse(await readBody(event))
+       // process or save to DB
+       return { success: true, data: body }
+     })
+
+2) Call from a page
+   - Use `useFetch()` or `useAsyncData()` with `$fetch()`:
+     <script setup>
+     const { data, pending } = useFetch('/api/example', { method: 'POST', body: { name: 'Test' } })
+     </script>
 
 Local developer commands
 - Install dependencies:

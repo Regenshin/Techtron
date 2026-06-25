@@ -4,6 +4,12 @@ export default defineNuxtConfig({
   css: ['~/assets/css/main.css'],
   compatibilityDate: '2025-01-01',
 
+  runtimeConfig: {
+    public: {
+      web3formsAccessKey: process.env.WEB3FORMS_ACCESS_KEY || ''
+    }
+  },
+
   app: {
     
   baseURL: '/Techtron/',

@@ -342,7 +342,7 @@ const getBadgeColor = (badge: string | null) => {
     <section class="py-16 from-red-950/50 via-red-900/30 to-red-950/50">
       <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         <h2 class="text-3xl font-bold text-neutral-800 mb-4">
-          {"Can't Find What You're Looking For?"}
+          Can't Find What You're Looking For?
         </h2>
         <p class="text-neutral-800 mb-8">
           Contact us and we will help you find the perfect product or source it for you.

@@ -38,22 +38,58 @@ const serviceOptions = [
 
 const isSubmitting = ref(false)
 const isSubmitted = ref(false)
+const config = useRuntimeConfig()
 
 async function onSubmit(event: FormSubmitEvent<Schema>) {
   isSubmitting.value = true
-  
-  // Simulate form submission
-  await new Promise(resolve => setTimeout(resolve, 1500))
-  
-  isSubmitting.value = false
-  isSubmitted.value = true
-  
-  // Reset form
-  state.name = ''
-  state.email = ''
-  state.phone = ''
-  state.service = ''
-  state.message = ''
+  try {
+    const parsed = schema.safeParse(state)
+    if (!parsed.success) {
+      isSubmitting.value = false
+      return
+    }
+
+    const payload = {
+      access_key: config.public?.web3formsAccessKey || '',
+      subject: `New contact form submission from ${state.name}`,
+      name: state.name,
+      email: state.email,
+      phone: state.phone,
+      service: state.service,
+      message: state.message
+    }
+
+    if (!payload.access_key) {
+      console.warn('WEB3FORMS_ACCESS_KEY is not set. Set it in your .env or runtime config.')
+    }
+
+    const res = await fetch('https://api.web3forms.com/submit', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(payload)
+    })
+
+    const data = await res.json().catch(() => ({}))
+
+    if (!res.ok || data.success === false) {
+      console.error('Web3Forms submission error', data)
+      isSubmitting.value = false
+      return
+    }
+
+    isSubmitted.value = true
+
+    // Reset form
+    state.name = ''
+    state.email = ''
+    state.phone = ''
+    state.service = ''
+    state.message = ''
+  } catch (err) {
+    console.error(err)
+  } finally {
+    isSubmitting.value = false
+  }
 }
 
 const contactInfo = [
@@ -109,7 +145,7 @@ function toggleFaq(index: number) {
         <div class="text-center max-w-3xl mx-auto">
           <span class="text-red-500 font-semibold text-sm uppercase tracking-wider">Contact Us</span>
           <h1 class="text-4xl md:text-5xl font-bold text-neutral-800 mt-4 mb-6">
-            {"Let's Connect"}
+            Let's Connect
           </h1>
           <p class="text-neutral-400 text-lg">
             Have a question or need a quote? We are here to help. Reach out to us and our team will get back to you promptly.

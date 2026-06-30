@@ -14,7 +14,7 @@ const navItems = computed<NavigationMenuItem[]>(() => [
 
 <template>
   <UApp>
-    <UHeader class="bg-neutral-900 border-b border-neutral-800 h-30">
+    <UHeader class="bg-red-600 border-b border-red-700 h-30 text-white">
       <template #title>
         <NuxtLink to="/" class="flex items-center gap-3">
            <img src="/Logo.png" alt="Techtron Live Limited" class="h-28 w-auto" />
@@ -22,13 +22,13 @@ const navItems = computed<NavigationMenuItem[]>(() => [
         </NuxtLink>
       </template>
 
-      <UNavigationMenu :items="navItems" class="hidden lg:flex" />
+      <UNavigationMenu :items="navItems" class="hidden lg:flex text-white! **:text-white! **:hover:text-white!" />
 
       <template #right>
         <NuxtLink to="/contact" class="hidden sm:flex">
           <UButton 
             label="Get Quote" 
-            color="primary"
+            class="bg-red-700! text-white! hover:bg-red-800!"
           />
         </NuxtLink>
       </template>
@@ -37,16 +37,16 @@ const navItems = computed<NavigationMenuItem[]>(() => [
         <UNavigationMenu
           :items="navItems"
           orientation="vertical"
-          class="-mx-2.5"
+          class="-mx-2.5 text-white! **:text-white! **:hover:text-white!"
         />
       </template>
     </UHeader>
 
-    <UMain class="bg-[#F8FAFC]">
+    <UMain class="bg-white">
       <NuxtPage />
     </UMain>
 
-    <footer class="bg-neutral-900 border-t border-neutral-800">
+    <footer class="bg-white border-t border-red-100">
       <div class="max-w-7xl mx-auto px-4 py-12">
         <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
           <!-- Brand -->
@@ -54,15 +54,15 @@ const navItems = computed<NavigationMenuItem[]>(() => [
             <NuxtLink to="/" class="flex items-center gap-3 mb-4">
               <img src="/Logo.png" alt="Techtron Live Limited" class="h-28 w-auto" />
             </NuxtLink>
-            <p class="text-neutral-400 text-sm">
+            <p class="text-neutral-500 text-sm">
               Your trusted partner for all technology solutions. Building reliability, one device at a time.
             </p>
           </div>
           
           <!-- Services -->
           <div>
-            <h4 class="text-white font-semibold mb-4">Services</h4>
-            <ul class="space-y-2 text-neutral-400 text-sm">
+            <h4 class="text-neutral-900 font-semibold mb-4">Services</h4>
+            <ul class="space-y-2 text-neutral-500 text-sm">
               <li><NuxtLink to="/services" class="hover:text-red-500 transition-colors">Phone Repairs</NuxtLink></li>
               <li><NuxtLink to="/services" class="hover:text-red-500 transition-colors">Laptop Repairs</NuxtLink></li>
               <li><NuxtLink to="/services" class="hover:text-red-500 transition-colors">Solar Installation</NuxtLink></li>
@@ -72,8 +72,8 @@ const navItems = computed<NavigationMenuItem[]>(() => [
           
           <!-- Company -->
           <div>
-            <h4 class="text-white font-semibold mb-4">Company</h4>
-            <ul class="space-y-2 text-neutral-400 text-sm">
+            <h4 class="text-neutral-900 font-semibold mb-4">Company</h4>
+            <ul class="space-y-2 text-neutral-500 text-sm">
               <li><NuxtLink to="/about" class="hover:text-red-500 transition-colors">About Us</NuxtLink></li>
               <li><NuxtLink to="/products" class="hover:text-red-500 transition-colors">Products</NuxtLink></li>
               <li><NuxtLink to="/contact" class="hover:text-red-500 transition-colors">Contact</NuxtLink></li>
@@ -82,23 +82,26 @@ const navItems = computed<NavigationMenuItem[]>(() => [
           
           <!-- Contact -->
           <div>
-            <h4 class="text-white font-semibold mb-4">Contact Us</h4>
-            <ul class="space-y-2 text-neutral-400 text-sm">
+            <h4 class="text-neutral-900 font-semibold mb-4">Contact Us</h4>
+            <ul class="space-y-2 text-neutral-500 text-sm">
+              
+              
+              <li class="flex items-center gap-2">
+                <UIcon name="i-lucide-map-pin" class="size-4 text-red-500" />
+                 Sovereign Center , Mandeville, Manchester, Jamaica
+                <br>
+                
+                +1 (876) 208-1629
+              </li>
+              <li class="flex items-center gap-2">
+                <UIcon name="i-lucide-map-pin" class="size-4 text-red-500" />
+                 Reliance Center Shop #13, Mandeville, Manchester, Jamaica
+                <br>
+                 +1 (876) 253-1007 
+              </li>
               <li class="flex items-center gap-2">
                 <UIcon name="i-lucide-mail" class="size-4 text-red-500" />
                 techtronlive@gmail.com
-              </li>
-              <li class="flex items-center gap-2">
-                <UIcon name="i-lucide-phone" class="size-4 text-red-500" />
-                +1 (876) 208-1629 / 253-1007
-              </li>
-              <li class="flex items-center gap-2">
-                <UIcon name="i-lucide-map-pin" class="size-4 text-red-500" />
-                Shop #F1 Sovereign Center, Mandeville, Manchester, Jamaica
-              </li>
-              <li class="flex items-center gap-2">
-                <UIcon name="i-lucide-map-pin" class="size-4 text-red-500" />
-                Shop 13 Reliance Center, Mandeville, Manchester, Jamaica
               </li>
             </ul>
             <div class="flex gap-3 mt-4">

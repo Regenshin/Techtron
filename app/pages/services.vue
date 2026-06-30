@@ -122,6 +122,8 @@ const process = [
     description: 'Every job undergoes rigorous testing to ensure everything works perfectly.'
   }
 ]
+
+const slug = (title: string) => title.toLowerCase().replace(/\s+/g, '-')
 </script>
 
 <template>
@@ -149,6 +151,7 @@ const process = [
           <div 
             v-for="(service, index) in mainServices" 
             :key="service.title"
+            :id="slug(service.title)"
             class="bg-neutral-900 border border-neutral-800 rounded-2xl overflow-hidden"
           >
             <div class="grid lg:grid-cols-5 gap-6 p-6 lg:p-8">

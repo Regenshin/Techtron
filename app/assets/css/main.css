@@ -5,23 +5,101 @@
   --font-sans: 'Inter', system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', monospace;
   
-  /* Techtron Live - Red and Black Theme */
+  /* Techtron Live - White and Red Theme */
   --color-techtron-red: #dc2626;
   --color-techtron-dark-red: #991b1b;
-  --color-techtron-black: #F8FAFC;
-  --color-techtron-dark: #171717;
-  --color-techtron-gray: #262626;
-  --color-techtron-light-gray: #404040;
+  --color-techtron-white: #ffffff;
+  --color-techtron-light: #f8fafc;
+  --color-techtron-gray: #374151;
+  --color-techtron-muted: #6b7280;
 }
 
 :root {
   --ui-radius: 0.5rem;
   --ui-container: 80rem;
   --ui-primary: var(--color-techtron-red);
+  --ui-background: var(--color-techtron-white);
+  --ui-foreground: #111827;
+  color: #111827;
+  background-color: #ffffff;
 }
 
 .dark {
   --ui-primary: var(--color-techtron-red);
+}
+
+body {
+  background-color: #ffffff;
+  color: #111827;
+}
+
+/* Light theme overrides for dark utility classes */
+.bg-neutral-900 {
+  background-color: #ffffff !important;
+}
+
+.bg-neutral-800,
+.bg-neutral-700,
+.bg-neutral-600 {
+  background-color: #f8fafc !important;
+}
+
+.border-neutral-800,
+.border-neutral-700,
+.border-neutral-600,
+.border-neutral-500 {
+  border-color: #e5e7eb !important;
+}
+
+.bg-neutral-900 .text-white,
+.bg-neutral-800 .text-white,
+.bg-neutral-700 .text-white {
+  color: #111827 !important;
+}
+
+.text-neutral-300,
+.text-neutral-400,
+.text-neutral-500,
+.text-neutral-600 {
+  color: #374151 !important;
+}
+
+.bg-black {
+  background-color: #ffffff !important;
+}
+
+.border-black {
+  border-color: #d1d5db !important;
+}
+
+/* Force navbar menu items to white */
+[data-slot="navigation-menu"] [data-slot="navigation-menu-link"],
+[data-slot="navigation-menu"] [data-slot="navigation-menu-trigger"],
+[data-slot="navigation-menu"] a,
+[data-slot="navigation-menu"] button {
+  color: #ffffff !important;
+}
+
+[data-slot="navigation-menu"] [data-slot="navigation-menu-link"]:hover,
+[data-slot="navigation-menu"] [data-slot="navigation-menu-trigger"]:hover,
+[data-slot="navigation-menu"] a:hover,
+[data-slot="navigation-menu"] button:hover {
+  color: #ffffff !important;
+}
+
+.bg-neutral-900\/50,
+.bg-neutral-800\/50,
+.bg-neutral-700\/50 {
+  background-color: rgba(248, 250, 252, 0.5) !important;
+}
+
+/* Brighten filter button labels */
+[data-slot="button"][data-color="neutral"] {
+  color: #4b5563 !important;
+}
+
+[data-slot="button"][data-color="neutral"]:hover {
+  color: #6b7280 !important;
 }
 
 /* Custom animations */
@@ -36,6 +114,19 @@
 
 .animate-spin-slow {
   animation: spin-slow 20s linear infinite;
+}
+
+@keyframes brand-scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-brand-scroll {
+  animation: brand-scroll 18s linear infinite;
 }
 
 /* Gradient text */

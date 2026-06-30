@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { computed, nextTick, ref, onMounted, onBeforeUnmount } from 'vue'
+
 useSeoMeta({
   title: 'About Us - Techtron Live Limited',
   description: 'Learn about Techtron Live Limited, our mission, values, and the leadership team dedicated to delivering exceptional technology solutions.'
@@ -98,6 +100,84 @@ const milestones = [
   { year: '2023', title: 'Innovation', description: 'Launched online store and nationwide delivery services.' },
   { year: '2024', title: 'Future', description: 'Continuing to grow and serve more customers than ever.' }
 ]
+
+const teamCarouselRef = ref<HTMLElement | null>(null)
+let teamAutoplayId: number | null = null
+const teamCount = leadershipTeam.length
+const teamSlides = computed(() => [...leadershipTeam, ...leadershipTeam, ...leadershipTeam])
+
+const getGap = (el: HTMLElement) => {
+  const gap = window.getComputedStyle(el).gap
+  return gap ? parseFloat(gap) : 0
+}
+
+const scrollTeamToIndex = (index: number, behavior: ScrollBehavior = 'smooth') => {
+  const el = teamCarouselRef.value
+  if (!el) return
+  const child = el.children[teamCount + index] as HTMLElement | undefined
+  if (!child) return
+  el.scrollTo({ left: child.offsetLeft, behavior })
+}
+
+const resetTeamPosition = () => {
+  const el = teamCarouselRef.value
+  if (!el) return
+  const child = el.children[teamCount] as HTMLElement | undefined
+  if (!child) return
+  el.scrollLeft = child.offsetLeft
+}
+
+const keepTeamLooping = () => {
+  const el = teamCarouselRef.value
+  if (!el) return
+  const children = Array.from(el.children) as HTMLElement[]
+  if (children.length === 0) return
+
+  const gap = getGap(el)
+  const itemWidth = children[0].offsetWidth + gap
+  const startOffset = children[teamCount]?.offsetLeft ?? 0
+  const totalWidth = itemWidth * teamCount
+
+  if (el.scrollLeft <= startOffset - itemWidth) {
+    el.scrollLeft += totalWidth
+  } else if (el.scrollLeft >= startOffset + totalWidth) {
+    el.scrollLeft -= totalWidth
+  }
+}
+
+const teamIndex = ref(0)
+
+const nextTeam = () => {
+  teamIndex.value = (teamIndex.value + 1) % teamCount
+  scrollTeamToIndex(teamIndex.value)
+}
+
+const prevTeam = () => {
+  teamIndex.value = (teamIndex.value - 1 + teamCount) % teamCount
+  scrollTeamToIndex(teamIndex.value)
+}
+
+const stopTeamAutoplay = () => {
+  if (teamAutoplayId) {
+    clearInterval(teamAutoplayId)
+    teamAutoplayId = null
+  }
+}
+
+const startTeamAutoplay = () => {
+  stopTeamAutoplay()
+  teamAutoplayId = window.setInterval(nextTeam, 4000)
+}
+
+onMounted(async () => {
+  await nextTick()
+  resetTeamPosition()
+  startTeamAutoplay()
+})
+
+onBeforeUnmount(() => {
+  stopTeamAutoplay()
+})
 </script>
 
 <template>
@@ -148,10 +228,7 @@ const milestones = [
                 class="rounded-xl w-full h-auto"
               />
             </div>
-            <div class="absolute -bottom-6 -right-6 bg-red-600 text-white px-8 py-4 rounded-xl">
-              <div class="text-3xl font-bold">5+</div>
-              <div class="text-sm opacity-90">Years Strong</div>
-            </div>
+            
           </div>
         </div>
       </div>
@@ -195,45 +272,65 @@ const milestones = [
           </p>
         </div>
         
-        <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-          <div 
-            v-for="member in leadershipTeam" 
-            :key="member.name"
-            class="group bg-neutral-900 border border-neutral-800 rounded-xl overflow-hidden card-hover"
+        <div class="relative">
+          <button
+            @click="prevTeam"
+            @mousedown="stopTeamAutoplay"
+            @mouseup="startTeamAutoplay"
+            class="absolute left-2 top-1/2 -translate-y-1/2 z-20 size-10 rounded-full bg-red-600/20 text-red-600 hover:bg-red-600/30 p-2 shadow-lg"
+            aria-label="Previous team member"
           >
-            <!-- Image -->
-            <div class="relative aspect-[4/3] bg-neutral-800 overflow-hidden">
-              <img 
-                :src="member.image" 
-                :alt="member.name"
-                class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-              />
-              <!-- Overlay with social links -->
-              <div class="absolute inset-0 bg-gradient-to-t from-neutral-900 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity flex items-end justify-center pb-4">
-                <div class="flex gap-2">
-                  <UButton 
-                    icon="i-simple-icons-linkedin" 
-                    color="neutral" 
+            <UIcon name="i-lucide-chevron-left" class="size-5 text-red-600" />
+          </button>
+          <button
+            @click="nextTeam"
+            @mousedown="stopTeamAutoplay"
+            @mouseup="startTeamAutoplay"
+            class="absolute right-2 top-1/2 -translate-y-1/2 z-20 size-10 rounded-full bg-red-600/20 text-red-600 hover:bg-red-600/30 p-2 shadow-lg"
+            aria-label="Next team member"
+          >
+            <UIcon name="i-lucide-chevron-right" class="size-5 text-red-600" />
+          </button>
+
+          <div
+            ref="teamCarouselRef"
+            class="overflow-x-auto scroll-smooth snap-x snap-mandatory flex gap-6 py-2 px-12"
+            @scroll="keepTeamLooping"
+            @pointerdown="stopTeamAutoplay"
+            @pointerup="startTeamAutoplay"
+            @touchstart="stopTeamAutoplay"
+            @touchend="startTeamAutoplay"
+          >
+            <div
+              v-for="(member, i) in teamSlides"
+              :key="`${member.name}-${i}`"
+              class="min-w-[80%] sm:min-w-[45%] lg:min-w-[30%] snap-start group bg-neutral-900 border border-neutral-800 rounded-xl overflow-hidden card-hover"
+            >
+              <div class="p-6">
+                <div class="w-16 h-16 rounded-full bg-red-600/10 text-red-500 flex items-center justify-center text-xl font-semibold mb-4">
+                  {{ member.name.split(' ').map((part: string) => part[0]).join('').slice(0, 2) }}
+                </div>
+                <h3 class="text-xl font-semibold text-white mb-1">{{ member.name }}</h3>
+                <p class="text-red-500 font-medium text-sm mb-3">{{ member.role }}</p>
+                <p class="text-neutral-400 text-sm">{{ member.bio }}</p>
+
+                <div class="flex gap-2 mt-5">
+                  <UButton
+                    icon="i-simple-icons-linkedin"
+                    color="neutral"
                     variant="solid"
                     size="sm"
                     :to="member.social.linkedin"
                   />
-                  <UButton 
-                    icon="i-simple-icons-x" 
-                    color="neutral" 
+                  <UButton
+                    icon="i-simple-icons-x"
+                    color="neutral"
                     variant="solid"
                     size="sm"
                     :to="member.social.twitter"
                   />
                 </div>
               </div>
-            </div>
-            
-            <!-- Content -->
-            <div class="p-6">
-              <h3 class="text-xl font-semibold text-white mb-1">{{ member.name }}</h3>
-              <p class="text-red-500 font-medium text-sm mb-3">{{ member.role }}</p>
-              <p class="text-neutral-400 text-sm">{{ member.bio }}</p>
             </div>
           </div>
         </div>
@@ -254,7 +351,7 @@ const milestones = [
           
           <div class="space-y-8 lg:space-y-0">
             <div 
-              v-for="(milestone, index) in milestones" 
+              v-for="(milestone, index) in milestones as Array<{ year: string; title: string; description: string }>" 
               :key="milestone.year"
               :class="[
                 'lg:flex lg:items-center lg:gap-8',

@@ -104,6 +104,52 @@ Web3Forms contact form details:
 
 Important note: this key is currently exposed as public runtime config, so for stricter security you may want to proxy submissions through a server-side API endpoint instead.
 
+RECENT UPDATES & NEW FEATURES (June 2026)
+===== Navigation & Header (app/app.vue) =====
+- Navigation menu items now render white with forced text-white! class and descendant overrides (**:text-white! and **:hover:text-white!).
+- "Get Quote" button styling updated: darker red (bg-red-700!) with hover state (hover:bg-red-800!) and white text (text-white!).
+
+===== Homepage Features (app/pages/index.vue) =====
+- Services section converted to an infinite auto-scrolling carousel with manual controls (prev/next buttons).
+- Carousel uses scroll-snap behavior and duplicates service items to create seamless looping.
+- `keepCarouselLooping()` handler resets scroll position at boundaries for infinite behavior.
+- Service cards are still clickable and anchor to matching sections on `/services` page.
+
+===== About Page (app/pages/about.vue) =====
+- Leadership team grid replaced with a horizontal auto-scrolling carousel.
+- Team member photos removed; initials-based avatar cards now display instead.
+- Carousel includes infinite scroll logic via duplicated team items and boundary reset handlers.
+- Carousel supports manual left/right navigation with arrow buttons positioned as overlays.
+
+===== Products Page (app/pages/products.vue) =====
+- Phone product category now limited to Apple (iPhone) and Samsung (Galaxy) models only.
+- Removed Google Pixel and OnePlus entries for brand focus.
+- Added new phone models:
+  - iPhone 15 Plus
+  - Samsung Galaxy S24+
+  - iPhone 15 Pro
+  - Samsung Galaxy Z Flip5
+- All product images verified; one base64-encoded image (Wireless Doorbell Camera) replaced with valid external URL.
+- Shopping cart ("Add to Cart") buttons are commented out in both product grid and modal.
+- Product filter labels brightened (color: #4b5563) for better contrast against white background.
+- Trusted brands section transformed into a smooth auto-scrolling logo carousel:
+  - Continuous scroll animation (`animate-brand-scroll`) at 18s per full cycle.
+  - Logos duplicated for seamless infinite loop.
+  - Displays: Apple, Samsung, HP, Dell, Lenovo, Acer, Asus.
+  - Logos are grayscale with opacity transitions on hover.
+
+===== CSS Updates (app/assets/css/main.css) =====
+- Added keyframe animation `brand-scroll` for horizontal infinit scrolling.
+- Added `.animate-brand-scroll` class for logo carousel animation (18s linear infinite).
+- Filter button labels now have explicit color override: #4b5563 (base) and #6b7280 (hover).
+- Navigation menu links forced white via data-slot selector overrides.
+- Custom utility classes for global neutral text brightening (text-neutral-400/500/600 → #374151).
+
+===== Theme & Styling =====
+- Site maintains white background (#ffffff) with red accent color (#dc2626 → red-600/700).
+- Neutral text colors globally brightened to #374151 for improved contrast against white.
+- Carousels and scrolling sections use Tailwind scroll-snap utilities and custom animations.
+
 UI primitives summary (what to edit for changes)
 - `components/ui/button.tsx` — change button variants, sizes, and aria defaults.
 - `components/ui/input.tsx` — edit validation display and accessibility props.

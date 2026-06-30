@@ -64,6 +64,88 @@ const testimonials = [
     avatar: '/placeholder-user.jpg'
   }
 ]
+
+const slug = (title: string) => title.toLowerCase().replace(/\s+/g, '-')
+
+import { computed, nextTick, ref, onMounted, onBeforeUnmount } from 'vue'
+
+const carouselRef = ref<HTMLElement | null>(null)
+const currentIndex = ref(0)
+let autoplayId: number | null = null
+const serviceCount = services.length
+const carouselServices = computed(() => [...services, ...services, ...services])
+
+const getGap = (el: HTMLElement) => {
+  const gap = window.getComputedStyle(el).gap
+  return gap ? parseFloat(gap) : 0
+}
+
+const scrollToIndex = (idx: number, behavior: ScrollBehavior = 'smooth') => {
+  const el = carouselRef.value
+  if (!el) return
+  const child = el.children[serviceCount + idx] as HTMLElement | undefined
+  if (!child) return
+  el.scrollTo({ left: child.offsetLeft, behavior })
+  currentIndex.value = idx
+}
+
+const resetCarouselPosition = () => {
+  const el = carouselRef.value
+  if (!el) return
+  const child = el.children[serviceCount] as HTMLElement | undefined
+  if (!child) return
+  el.scrollLeft = child.offsetLeft
+}
+
+const keepCarouselLooping = () => {
+  const el = carouselRef.value
+  if (!el) return
+  const children = Array.from(el.children) as HTMLElement[]
+  if (children.length === 0) return
+
+  const gap = getGap(el)
+  const itemWidth = children[0].offsetWidth + gap
+  const startOffset = children[serviceCount]?.offsetLeft ?? 0
+  const totalWidth = itemWidth * serviceCount
+
+  if (el.scrollLeft <= startOffset - itemWidth) {
+    el.scrollLeft += totalWidth
+  } else if (el.scrollLeft >= startOffset + totalWidth) {
+    el.scrollLeft -= totalWidth
+  }
+}
+
+const nextSlide = () => {
+  const next = (currentIndex.value + 1) % serviceCount
+  scrollToIndex(next)
+}
+
+const prevSlide = () => {
+  const prev = (currentIndex.value - 1 + serviceCount) % serviceCount
+  scrollToIndex(prev)
+}
+
+const startAutoplay = () => {
+  stopAutoplay()
+  autoplayId = window.setInterval(nextSlide, 3500)
+}
+
+const stopAutoplay = () => {
+  if (autoplayId) {
+    clearInterval(autoplayId)
+    autoplayId = null
+  }
+}
+
+onMounted(async () => {
+  await nextTick()
+  resetCarouselPosition()
+  startAutoplay()
+})
+
+onBeforeUnmount(() => {
+  stopAutoplay()
+})
 </script>
 
 <template>
@@ -71,20 +153,18 @@ const testimonials = [
     <!-- Hero Section with Globe -->
     <section class="relative overflow-hidden py-12 lg:py-20">
       <!-- Background effects -->
-      <div class="absolute inset-0 from-red-950/20 via-transparent to-transparent" />
-      <div class="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] sm:w-[800px] sm:h-[800px] rounded-full blur-3xl" />
+      
+      
       
       <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div class="grid lg:grid-cols-2 gap-8 lg:gap-12 items-center">
           <!-- Content -->
           <div class="text-center lg:text-left">
-            <div class="inline-flex items-center gap-2 px-4 py-2 bg-red-600/10 border border-red-600/20 rounded-full mb-6">
-              <span class="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
-              <span class="text-red-400 text-sm font-medium">Now Serving Nationwide</span>
-            </div>
             
-            <h1 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-black leading-tight mb-6">
+            
+            <h1 class="text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-bold text-black leading-tight mb-6 text-center">
               Powering Your
+              <br />
               <span class="text-red-500">Digital</span>
               <br />
               World Forward
@@ -95,21 +175,19 @@ const testimonials = [
             </p>
             
             <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start">
-              <UButton 
-                label="Explore Services" 
-                color="primary" 
-                size="lg"
+              <NuxtLink
                 to="/services"
-                icon="i-lucide-arrow-right"
-                trailing
-              />
-              <UButton 
-                label="Get Free Quote" 
-                color="neutral" 
-                variant="outline"
-                size="lg"
+                class="inline-flex items-center justify-center gap-2 rounded-xl bg-red-600 px-6 py-3 text-base font-semibold text-white transition hover:bg-red-700"
+              >
+                <span>Explore Services</span>
+                <UIcon name="i-lucide-arrow-right" class="size-5" />
+              </NuxtLink>
+              <NuxtLink
                 to="/contact"
-              />
+                class="inline-flex items-center justify-center gap-2 rounded-xl border border-neutral-300 bg-white px-6 py-3 text-base font-semibold text-neutral-900 transition hover:bg-neutral-100"
+              >
+                Get Free Quote
+              </NuxtLink>
             </div>
           </div>
           
@@ -150,17 +228,46 @@ const testimonials = [
           </p>
         </div>
         
-        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-          <div 
-            v-for="service in services" 
-            :key="service.title"
-            class="group bg-neutral-900 border border-neutral-800 rounded-xl p-6 card-hover"
+        <div class="relative">
+          <button
+            @click="prevSlide"
+            @mousedown="stopAutoplay"
+            @mouseup="startAutoplay"
+            class="absolute left-2 top-1/2 -translate-y-1/2 z-20 size-10 rounded-full bg-red-600/20 text-red-600 hover:bg-red-600/30 p-2 shadow-lg"
+            aria-label="Previous"
           >
-            <div class="w-12 h-12 bg-red-600/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-red-600/20 transition-colors">
-              <UIcon :name="service.icon" class="size-6 text-red-500" />
-            </div>
-            <h3 class="text-xl font-semibold text-white mb-2">{{ service.title }}</h3>
-            <p class="text-neutral-400 text-sm">{{ service.description }}</p>
+            <UIcon name="i-lucide-chevron-left" class="size-5 text-red-600" />
+          </button>
+          <button
+            @click="nextSlide"
+            @mousedown="stopAutoplay"
+            @mouseup="startAutoplay"
+            class="absolute right-2 top-1/2 -translate-y-1/2 z-20 size-10 rounded-full bg-red-600/20 text-red-600 hover:bg-red-600/30 p-2 shadow-lg"
+            aria-label="Next"
+          >
+            <UIcon name="i-lucide-chevron-right" class="size-5 text-red-600" />
+          </button>
+          <div
+            ref="carouselRef"
+            class="overflow-x-auto no-scrollbar scroll-smooth snap-x snap-mandatory flex gap-4 py-2 px-12"
+            @scroll="keepCarouselLooping"
+            @pointerdown="stopAutoplay"
+            @pointerup="startAutoplay"
+            @touchstart="stopAutoplay"
+            @touchend="startAutoplay"
+          >
+            <NuxtLink
+              v-for="(service, i) in carouselServices"
+              :key="`${service.title}-${i}`"
+              :to="`/services#${slug(service.title)}`"
+              class="min-w-[80%] sm:min-w-[45%] lg:min-w-[30%] snap-start bg-neutral-900 border border-neutral-800 rounded-xl p-6 card-hover block"
+            >
+              <div class="w-12 h-12 bg-red-600/10 rounded-lg flex items-center justify-center mb-4 group-hover:bg-red-600/20 transition-colors">
+                <UIcon :name="service.icon" class="size-6 text-red-500" />
+              </div>
+              <h3 class="text-xl font-semibold text-white mb-2">{{ service.title }}</h3>
+              <p class="text-neutral-400 text-sm">{{ service.description }}</p>
+            </NuxtLink>
           </div>
         </div>
         
@@ -192,7 +299,7 @@ const testimonials = [
             
             <div class="space-y-4">
               <div class="flex items-start gap-4">
-                <div class="w-10 h-10 bg-red-600/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                <div class="w-10 h-10 bg-red-600/10 rounded-lg flex items-center justify-center shrink-0">
                   <UIcon name="i-lucide-shield-check" class="size-5 text-red-500" />
                 </div>
                 <div>
@@ -202,22 +309,22 @@ const testimonials = [
               </div>
               
               <div class="flex items-start gap-4">
-                <div class="w-10 h-10 bg-red-600/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                <div class="w-10 h-10 bg-red-600/10 rounded-lg flex items-center justify-center shrink-0">
                   <UIcon name="i-lucide-clock" class="size-5 text-red-500" />
                 </div>
                 <div>
                   <h4 class="text-black font-semibold">Quick Turnaround</h4>
-                  <p class="text-neutral-400 text-sm">Most repairs completed within 24-48 hours. Same-day service available.</p>
+                  <p class="text-neutral-400 text-sm">Same-day service available. Most repairs completed within 24-48 hours. </p>
                 </div>
               </div>
               
               <div class="flex items-start gap-4">
-                <div class="w-10 h-10 bg-red-600/10 rounded-lg flex items-center justify-center flex-shrink-0">
+                <div class="w-10 h-10 bg-red-600/10 rounded-lg flex items-center justify-center shrink-0">
                   <UIcon name="i-lucide-users" class="size-5 text-red-500" />
                 </div>
                 <div>
                   <h4 class="text-black font-semibold">Expert Technicians</h4>
-                  <p class="text-neutral-400 text-sm">Certified professionals with years of experience in the industry.</p>
+                  <p class="text-neutral-400 text-sm">Certified professionals with more than 10 years of experience in the industry.</p>
                 </div>
               </div>
             </div>
@@ -232,10 +339,7 @@ const testimonials = [
               />
             </div>
             <!-- Floating badge -->
-            <div class="absolute -bottom-4 -left-4 bg-red-600 text-white px-6 py-3 rounded-xl shadow-lg">
-              <div class="text-2xl font-bold">5+</div>
-              <div class="text-sm opacity-90">Years of Excellence</div>
-            </div>
+            
           </div>
         </div>
       </div>
